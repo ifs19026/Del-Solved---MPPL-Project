@@ -1,3 +1,9 @@
+<?php
+use App\Models\Setting;
+$settings = Setting::latest()->first();
+
+?>
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -7,100 +13,135 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Del Solved</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="https://kit.fontawesome.com/98f0cdd253.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    />
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+  />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+    @yield('other_styles')
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    @toastr_css
+
+
+
+
+
 </head>
 <body>
-<div class="container-fluid">
-      <!-- First section -->
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-          <h1>
-            <a href="#" class="navbar-brand">Del Solved</a>
-          </h1>
-          <form action="#" class="form-inline mr-3 mb-2 mb-sm-0">
-            <input type="text" class="form-control" placeholder="search" />
-            <button type="submit" class="btn btn-success">Search Forum</button>
-          </form>
-        </div>
-      </nav>
+    <div class="container-fluid">
+        <!-- First section -->
+        <nav class="navbar navbar-dark bg-dark">
+          <div class="container">
+            <h1>
+              @if ($settings->forum_name)
+              <a href="/" class="navbar-brand">{{$settings->forum_name}}</a>
+              @else
+              <a href="/" class="navbar-brand">Dev Forum</a>
+              @endif
+            </h1>
 
-      <!-- first section end -->
-    </div>
-    <div class="container">
-      <nav class="breadcrumb">
-        <a href="#" class="breadcrumb-item active"> Dashboard</a>
-      </nav>
 
-      @yield('content')
-                        {{--}} @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+            {{-- Survey Button --}}
+            @auth
+            <a class="nav-item nav-link text-white btn btn-outline-success"
+            href="/survey">Survey</a>
+            @endauth
 
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
 
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+            <form action="{{route('category.search')}}" method="POST" class="form-inline mr-3 mb-2 mb-sm-0">
+              @csrf
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" name="keyword" placeholder="Search Category" >
+                <div class="input-group-append">
+                  <button class="btn btn-outline-success" type="submit" id="button-addon2"><i class="fa fa-search"></i></button>
                 </div>
+              </div>
+            </form>
+
+            @guest
+            <a class="nav-item nav-link text-white btn btn-dark" href="{{ route('login') }}">Login</a>
+            <a class="nav-item nav-link text-white btn btn-dark" href="{{ route('register') }}">Register</a>
+            @endguest
+
+            @auth
+            @if ((auth()->user()->is_admin))
+            <a class="nav-item nav-link text-white btn btn-outline-success" href="/dashboard/home">Admin Panel</a>
+            @endif
+
+
+            {{-- Profil --}}
+            <div>
+              @if (auth()->user()->image)
+              <a href="/home">
+                <img width="45" height="45" class="rounded-circle"
+                src="{{ asset('/storage/profile/'.auth()->user()->image) }}" alt="profil-photo">
+              </a>
+              @else
+              <a href="/home">
+                <img width="45" height="45" class="rounded-circle"
+                src="{{ asset('/images/profile.png') }}" alt="profil-photo">
+              </a>
+              @endif
             </div>
+
+
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+              @csrf
+              <button type="submit" class="btn btn-outline-danger">Logout</button>
+            </form>
+            @endauth
+
+          </div>
         </nav>
 
-        <main class="py-4">
+        <!-- first section end -->
+      </div>
+      <div class="container">
+        <nav class="breadcrumb">
+          <a href="/" class="breadcrumb-item active"> Dashboard</a>
+        </nav>
+
             @yield('content')
-        </main>
-    </div>  {{--}}
+
+
 
     <div class="container-fluid">
-      <footer class="small bg-dark text-white">
-        <div class="container py-4">
-          <ul class="list-inline mb-0 text-center">
-            <li class="list-inline-item">
-              &copy; 2022 Del Solved
-            </li>
-            <li class="list-inline-item">All rights reserved</li>
-            <li class="list-inline-item">Terms and privacy policy</li>
-          </ul>
-        </div>
-      </footer>
-    </div>
+        <footer class="small bg-dark text-white">
+          <div class="container py-4">
+            <ul class="list-inline mb-0 text-center">
+              <li class="list-inline-item">
+                &copy; 2022 Del Solved
+              </li>
+              <li class="list-inline-item">All rights reserved</li>
+              <li class="list-inline-item">Terms and privacy policy</li>
+            </ul>
+          </div>
+        </footer>
+      </div>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+
 </body>
+
+    @jquery
+    @toastr_js
+    @toastr_render
 </html>

@@ -9,10 +9,23 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>DRO -Digital Agency</title>
+  <title>Del Solved</title>
 
   <!-- Bootstrap CSS -->
+
+  <!-- Bootstrap CSS -->
+  <link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
   <link href="{{asset('admin/css/bootstrap.min.css')}}" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="{{asset('admin/css/bootstrap-theme.css')}}" rel="stylesheet">
+
+  <link rel="dns-prefetch" href="//fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <!-- Styles -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
   <!-- bootstrap theme -->
   <link href="{{asset('admin/css/bootstrap-theme.css')}}" rel="stylesheet">
   <!--external css-->
@@ -35,6 +48,7 @@
   <link href="{{asset('admin/css/xcharts.min.css')}}" rel=" stylesheet">
   <link href="{{asset('admin/css/jquery-ui-1.10.4.min.css')}}" rel="stylesheet">
 
+  @toastr_css
   <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
 
 </head>
@@ -52,58 +66,59 @@
         <ul class="sidebar-menu">
           <li class="active">
             <a class="" href="/dashboard/home">
-                          <i class="icon_house_alt"></i>
-                          <span>Dashboard</span>
-                      </a>
-          </li>
-          <li class="sub-menu">
-            <a href="javascript:;" class="">
-                          <i class="fa fa-edit"></i>
-                          <span>Actions</span>
-                          <span class="menu-arrow arrow_carrot-right"></span>
-                      </a>
-            <ul class="sub">
-              <li><a class="" href={{route('category.new')}}>Create Category</a></li>
-              <li><a class="" href={{route('forum.new')}}>Create Forum</a></li>
-
-
-            </ul>
+              <i class="icon_house_alt"></i>
+              <span>Dashboard</span>
+            </a>
           </li>
 
           <li>
+            <a class="" href="{{route('settings.form')}}">
+              <i class="fa fa-cog"></i>
+              <span>Forum Settings</span>
+            </a>
+          </li>
+              <li>
+                <a class="" href="{{route('category.new')}}">
+                    <i class="fa fa-plus"></i>
+                    <span>Create Category</span>
+                </a>
+              </li>
+              <li>
+                <a class="" href="{{route('forum.new')}}">
+                    <i class="fa fa-plus"></i>
+                    <span>Create Forum</span>
+                </a>
+              </li>
+         <li>
             <a class="" href="/dashboard/users">
-                          <i class="fa fa-users"></i>
-                          <span>Users</span>
-                      </a>
+                <i class="fa fa-users"></i>
+                <span>Users</span>
+            </a>
           </li>
 
-         <li>
+          <li>
             <a class="" href="{{route('categories')}}">
-                          <i class="fa fa-users"></i>
-                          <span>Categories</span>
-                      </a>
+                <i class="fa fa-list-alt"></i>
+                <span>Categories</span>
+            </a>
           </li>
 
           <li>
             <a class="" href="{{route('forums')}}">
-                          <i class="fa fa-users"></i>
-                          <span>Forums</span>
-                      </a>
+                <i class="fa fa-users"></i>
+                <span>Forums</span>
+            </a>
           </li>
+       </ul>
 
-
-
-        </ul>
         <!-- sidebar menu end-->
       </div>
     </aside>
-    <!--sidebar end-->
 
+    <!--sidebar end-->
     <div id="app">
       @yield('content')
     </div>
-
-
   </section>
   <!-- container section start -->
 
@@ -122,7 +137,9 @@
   <script src="{{asset('admin/js/jquery-ui-1.10.4.min.js')}}"></script>
   <script type="text/javascript" src="{{asset('admin/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
   <!-- bootstrap -->
-  <script src="{{asset('admin/js/bootstrap.min.js')}}"></script>
+
+  <link href="{{asset('admin/js/bootstrap.min.js')}}" rel="stylesheet">
+  {{-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> --}}
   <!-- nice scroll -->
   <script src="{{asset('admin/js/jquery.scrollTo.min.js')}}"></script>
   <script src="{{asset('admin/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
@@ -202,7 +219,9 @@
         });
       });
     </script>
-
+ @jquery
+ @toastr_js
+ @toastr_render
 </body>
 
 </html>

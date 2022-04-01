@@ -9,7 +9,7 @@
             <div class="col-lg-12">
               <h3 class="page-header"><i class="fa fa-laptop"></i> Dashboard</h3>
               <ol class="breadcrumb">
-                <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+                <li><i class="fa fa-home"></i><a href=/>Home</a></li>
                 <li><i class="fa fa-laptop"></i>Dashboard</li>
               </ol>
             </div>
@@ -26,9 +26,13 @@
           <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box blue-bg">
-                <i class="fa fa-cloud-download"></i>
+                <i class="fa fa-list-alt"></i>
+                @if ($categories->count() > 0)
+                <div class="count">{{$categories->count()}}</div>
+                @else
                 <div class="count">0</div>
-                <div class="title">Downloads</div>
+                @endif
+                <div class="title">Categories</div>
               </div>
               <!--/.info-box-->
             </div>
@@ -37,7 +41,11 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box brown-bg">
                 <i class="fa fa-users"></i>
-              <div class="count">30</div>
+                @if ($users->count() > 0)
+                <div class="count">{{$users->count()}}</div>
+                @else
+                <div class="count">0</div>
+                @endif
                 <div class="title">Users</div>
               </div>
               <!--/.info-box-->
@@ -46,9 +54,13 @@
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box dark-bg">
-                <i class="fa fa-question"></i>
-                <!-- {{-- <div class="count">{{count($data['all_questions'])}}</div> --}} -->
-                <div class="title">Questions</div>
+                <i class="fa fa-users"></i>
+                @if ($forums->count() > 0)
+                <div class="count">{{$forums->count()}}</div>
+                @else
+                <div class="count">0</div>
+                @endif
+                <div class="title">Forums</div>
               </div>
               <!--/.info-box-->
             </div>
@@ -56,9 +68,13 @@
 
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
               <div class="info-box green-bg">
-                <i class="fa fa-cubes"></i>
-                <div class="count">1.426</div>
-                <div class="title">Stock</div>
+                <i class="fa fa-comment"></i>
+                @if ($topics->count() > 0)
+                <div class="count">{{$topics->count()}}</div>
+                @else
+                <div class="count">0</div>
+                @endif
+                <div class="title">Topics</div>
               </div>
               <!--/.info-box-->
             </div>
@@ -92,9 +108,8 @@
                       </tr>
                     </thead>
                     <tbody>
-
-                         {{--@if (count($data['users'])> 0)
-                            @foreach ($data['users'] as $user)
+                        @if (count($users)> 0)
+                            @foreach ($users as $user)
                             <tr>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
@@ -108,12 +123,11 @@
 
                               </tr>
                             @endforeach
-                         @endif --}}
-
+                        @endif
                     </tbody>
                   </table>
 
-{{--                 {{--  {{ $data['users']->links() }} --}}
+                  {{ $users->links() }}
                 </div>
 
               </div>

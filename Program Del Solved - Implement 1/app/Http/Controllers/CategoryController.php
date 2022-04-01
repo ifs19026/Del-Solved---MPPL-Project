@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use Illuminate\Support\Facades\Session;
+use App\Notifications\NewCategory;
+use App\Models\Forum;
+use App\Models\Discussion;
+use App\Models\User;
+use Telegram;
 
 class CategoryController extends Controller
 {
@@ -15,10 +20,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
         $categories = Category::latest()->paginate(20);
-        return view('admin.pages.categories', \compact('categories'));
 
+        return view('admin.pages.categories', \compact('categories'));
     }
 
     /**
@@ -41,18 +45,35 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'image' => 'required',
-            'desc' => 'required'
+            'title'=>'required',
+            'image'=>'required',
+            'desc'=>'required'
         ]);
+        $image = $request->image;
+        $name = $image->getClientOriginalName();
+        $new_name = time().$name;
+        $dir = "storage/images/categories/";
+        $image->move($dir, $new_name);
+        
         $category = new Category;
         $category->title = $request->title;
         $category->desc = $request->desc;
         $category->user_id = auth()->id();
-        $category->image = "jhiyhufuhjuitgyhgbjhihu";
+        $category->image = $new_name;
         $category->save();
-        Session::flash('message', 'Category Created Successfully');
-        Session::flash('alert-class', 'alert-success');
+
+        $latestCategory = Category::latest()->first();
+        $admins = User::where('is_admin', 1)->get();
+        foreach ($admins as $admin) {
+            $admin->notify(new NewCategory($latestCategory));
+        }
+
+        toastr()->success('Discussion Started successfully!');
+        Telegram::sendMessage([
+            'chat_id'=>env('TELEGRAM_CHAT_ID', '-1001162615538'),
+            'parse_mode'=>'HTML',
+            'text'=>'<b>'.auth()->user()->name."</b>"." Created Category "."<b>".$request->title."</b>"
+        ]);
         return back();
     }
 
@@ -79,6 +100,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('admin.pages.edit_category', \compact('category'));
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -107,7 +129,7 @@ class CategoryController extends Controller
         if ($request->desc) {
             $category->desc = $request->desc;
         }
-
+        
         if ($request->image) {
             $category->image = $new_name;
         }
@@ -128,9 +150,31 @@ class CategoryController extends Controller
     {
         $category = Category::find($id);
         $category->delete();
-
+        
         Session::flash('message', 'Category Deleted Successfully');
         Session::flash('alert-class', 'alert-success');
+        return back();
+    }
+
+    /**
+    * Searches category
+    *
+    * @param
+    * @return \Illuminate\Http\Response
+    */
+    public function search(Request $request)
+    {
+        $user = new User;
+        $users_online =  $user->allOnline();
+        $forumsCount = count(Forum::all());
+        $topicsCount = count(Discussion::all());
+        $totalMembers = count(User::all());
+        $newest = User::latest()->first();
+        $totalCategories = count(Category::all());
+        $categories = Category::query()->where('desc', 'LIKE', "%{$request->keyword}%")->get();
+        // dd($categories);
+        $few_users = User::latest()->take(5)->get();
+        return view('welcome', \compact('categories', 'forumsCount', 'topicsCount', 'newest', 'totalMembers', 'totalCategories', 'users_online', 'few_users'));
         return back();
     }
 }

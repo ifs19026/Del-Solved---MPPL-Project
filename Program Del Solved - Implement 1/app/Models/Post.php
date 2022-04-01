@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    public function forum()
+    public function topic()
     {
-        return $this->belongsTo('App\Models\Forum');
+        return $this->belongsTo('App\Models\Topic');
     }
 }

@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Session;
 
 @section('content')
           <!--main content start-->
-
-
+       
+          
     <section id="main-content">
         <section class="wrapper">
           <div class="row">
@@ -34,21 +34,21 @@ use Illuminate\Support\Facades\Session;
 
       <p class="alert
       {{ Session::get('alert-class', 'alert-success') }}">{{Session::get('message') }}</p>
-
+      
       @endif
       @if ($category)
-
-
+          
+      
       <form class="form-horizontal" method="POST" action="{{ route('category.update', $category->id)}}" enctype="multipart/form-data">
           @csrf
-
+      
         <div class="form-group">
           <label class="col-lg-2 control-label">Category Title</label>
           <div class="col-lg-10">
           <input name="title" value="{{$category->title}}" class="form-control" value=""/>
           </div>
         </div>
-
+       
 
         <div class="form-group">
             <label class="col-lg-2 control-label">Category Image</label>
@@ -56,8 +56,8 @@ use Illuminate\Support\Facades\Session;
             <input type="file" name="image" class="form-control" />
             </div>
           </div>
-
-
+        
+          
         <div class="form-group">
           <label class="col-lg-2 control-label">Category description</label>
           <div class="col-lg-10">
@@ -67,8 +67,8 @@ use Illuminate\Support\Facades\Session;
           </div>
         </div>
 
-
-
+       
+        
 
         <div class="form-group">
           <div class="col-lg-offset-2 col-lg-10">
@@ -86,5 +86,5 @@ use Illuminate\Support\Facades\Session;
         </section>
       </section>
       <!--main content end-->
-
+      
 @endsection
