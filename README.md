@@ -5,6 +5,9 @@ Berikut running step:
 1. clone file proyek
 2. buat database terserah bebas namanya (kalo udah ada, pakai yang lama aja)
 3. buka hasil clone di text editor (saran vsc atau php storm)
+
+!!!! oiya jangan lupa buat file env baru ya, sesuaikan sama config database masing2 !!!!
+
 4. lakukan "composer install" di terminal untuk generate laravel
 5. lakukan "node install" di terminal untuk generate file node
 6. lakukan "php artisan migrate:fresh --seed" untuk generate data default 
