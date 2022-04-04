@@ -38,7 +38,7 @@
                         <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
-                        
+
                       </tr>
                     </thead>
                     <tbody>
@@ -50,8 +50,8 @@
                                 <td>{{$user->rank}}</td>
                                 <td><a href="/dashboard/users/{{$user->id}}"><i class="fa fa-eye text-success"></i></a></td>
                                 <td><a href="#"><i class="fa fa-edit text-info"></i></a></td>
-                                <td><a href="#" class="text-danger"><i class="fas fa-trash text-danger"></i></a></td>
-                               
+                                <td><a href="#" class="text-danger"><i class="fas fa-trash text-danger alert_notifuser"></i></a></td>
+
                               </tr>
                             @endforeach
                         @endif
@@ -60,16 +60,16 @@
 
                   {{ $users->links() }}
                 </div>
-  
+
               </div>
-  
+
             </div>
-            
+
             </div>
             <!--/col-->
-  
+
           </div>
-  
+
 
 
         </section>

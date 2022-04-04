@@ -40,7 +40,7 @@
                     {{$topic->title}}
                   </div>
                   <div>
-                    <span class="font-weight-bold">Posted:</span> 
+                    <span class="font-weight-bold">Posted:</span>
                     {{ $topic->created_at->diffForHumans() }}
                   </div>
                 </td>
@@ -98,9 +98,9 @@
                   </div>
                   @if(auth()->id() == $reply->user_id)
                   <div>
-                    <a href="{{route('reply.delete', $reply->id)}}" ><i class="fa fa-trash text-danger"></i></a>
+                    <a href="{{route('reply.delete', $reply->id)}}" ><i class="fa fa-trash text-danger alert_notifreply"></i></a>
                   </div>
-            
+
                   @else
                   <div>
                     <a href="{{route('reply.like', $reply->id)}}" class="mr-3"><i class="fa fa-thumbs-up text-success"></i>{{$reply->likes}}</a>
@@ -114,24 +114,24 @@
                   <div>
                     <span class="font-weight-bold">Joined:</span>{{ \Carbon\Carbon::parse($topic->user->created_at)->diffForHumans() }}
                   </div>
-                  
+
                 </td>
                 <td>
                   <p>
                    {{$reply->desc}}
                   </p>
-                 
+
                 </td>
-              
+
               </tr>
             </tbody>
           </table>
-              
+
           @endforeach
-       
-              
+
+
           @else
-             <h3>No replies to this discussion yet!</h3> 
+             <h3>No replies to this discussion yet!</h3>
           @endif
         </div>
       </div>
@@ -163,7 +163,7 @@
       <textarea
         class="form-control"
         name="desc"
-        
+
         rows="10"
         required
       ></textarea>
@@ -212,6 +212,6 @@
   <a href="#">Have you forgotten your account details?</a>
 </p>
 @endif
-  
+
 </div>
 @endsection

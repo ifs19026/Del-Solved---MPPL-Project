@@ -136,6 +136,80 @@ $settings = Setting::latest()->first();
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+     <!-- Script Alert Delete  -->
+      <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous">
+      </script>
+      <!-- script js sweet alert -->
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.15.7/dist/sweetalert2.all.min.js"></script>
+
+      <!-- script untuk konfirmasi hapus data dengan sweet alert  -->
+      <script>
+        $('.alert_notifsurvey').on('click',function(){
+            var getLink = $(this).attr('href');
+            Swal.fire({
+                title: "Are You Sure?",
+                text: 'Do you want delete this survey?',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Delete',
+                cancelButtonColor: '#D3D3D3',
+                cancelButtonText: "Cancel"
+
+            }).then(result => {
+                //jika klik ya maka Delete
+                if(result.isConfirmed){
+                    window.location.href = getLink
+                }
+            })
+            return false;
+        });
+    </script>
+
+<script>
+    $('.alert_notiftopic').on('click',function(){
+        var getLink = $(this).attr('href');
+        Swal.fire({
+            title: "Are You Sure?",
+            text: 'Do you want delete this topic?',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Delete',
+            cancelButtonColor: '#D3D3D3',
+            cancelButtonText: "Cancel"
+
+        }).then(result => {
+            //jika klik ya maka Delete
+            if(result.isConfirmed){
+                window.location.href = getLink
+            }
+        })
+        return false;
+    });
+</script>
+
+<script>
+    $('.alert_notifreply').on('click',function(){
+        var getLink = $(this).attr('href');
+        Swal.fire({
+            title: "Are You Sure?",
+            text: 'Do you want delete this reply?',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            confirmButtonText: 'Delete',
+            cancelButtonColor: '#D3D3D3',
+            cancelButtonText: "Cancel"
+
+        }).then(result => {
+            //jika klik ya maka Delete
+            if(result.isConfirmed){
+                window.location.href = getLink
+            }
+        })
+        return false;
+    });
+</script>
 
 
 

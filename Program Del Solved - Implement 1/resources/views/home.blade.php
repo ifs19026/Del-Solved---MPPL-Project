@@ -124,7 +124,7 @@
                                                     </td>
                                                     <td class="text-center">
                                                         <a class="btn" href="/home/edit/{{ $discussion->id }}"><i class="fa-solid fa-pen-to-square text-primary"></i></a>
-                                                        <a class="btn" href="/home/delete/{{ $discussion->id }}"><i class="fa-solid fa-trash-can text-danger"></i></a>
+                                                        <a class="btn alert_notiftopic" href="/home/delete/{{ $discussion->id }}"><i class="fa-solid fa-trash-can text-danger "></i></a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

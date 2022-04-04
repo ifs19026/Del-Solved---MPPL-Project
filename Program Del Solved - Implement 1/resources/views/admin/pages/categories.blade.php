@@ -38,7 +38,7 @@
                         <th>View</th>
                         <th>Edit</th>
                         <th>Delete</th>
-                        
+
                       </tr>
                     </thead>
                     <tbody>
@@ -50,8 +50,8 @@
                                 <td>{!!$category->desc!!}</td>
                                 <td><a href="{{route('category',$category->id)}}"><i class="fa fa-eye text-success"></i></a></td>
                                 <td><a href="{{route('category.update',$category->id)}}"><i class="fa fa-edit text-info"></i></a></td>
-                                <td><a href="{{route('category.destroy',$category->id)}}" class="text-danger"><i class="fa fa-trash"></i>Delete</a></td>
-                               
+                                <td><a href="{{route('category.destroy',$category->id)}}" class="text-danger"><i class="fa-solid fa-trash-can text-danger alert_notifcategory"></i></a></td>
+
                               </tr>
                             @endforeach
                         @endif
@@ -60,16 +60,16 @@
 
                   {{ $categories->links() }}
                 </div>
-  
+
               </div>
-  
+
             </div>
-            
+
             </div>
             <!--/col-->
-  
+
           </div>
-  
+
 
 
         </section>

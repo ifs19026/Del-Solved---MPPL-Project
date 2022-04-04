@@ -118,7 +118,7 @@
 
                                 <td><form action="{{ route('user.delete', ['id' => $user->id]) }}" method="POST" >
                                   @csrf
-                                  <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                  <input type="submit" class="btn btn-sm btn-danger alert_notifuser" value="Delete">
                                 </form></td>
 
                               </tr>

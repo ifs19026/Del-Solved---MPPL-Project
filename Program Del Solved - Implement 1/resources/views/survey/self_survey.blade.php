@@ -93,7 +93,7 @@
             <p>{{ $survey->body }}</p>
             <a href="#">{{ $survey->link }}</a><br>
             <i class="fa fa-clock-o" aria-hidden="true"></i> <span>Berlaku hingga 20 Maret 2022</span>
-            
+
             <div class="mb-4 d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="css-button mr-3" href="/survey/self/edit/{{ $survey->id }}">
               <span class="css-button-icon"><svg width="16" height="16" viewBox="2 2 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M13.293 3.293a1 1 0 011.414 0l2 2a1 1 0 010 1.414l-9 9a1 1 0 01-.39.242l-3 1a1 1 0 01-1.266-1.265l1-3a1 1 0 01.242-.391l9-9zM14 4l2 2-9 9-3 1 1-3 9-9z" clip-rule="evenodd"/>
@@ -102,14 +102,14 @@
               <span class="css-button-text"><span>Edit</span></span>
             </a>
 
-            <a class="css-button1" href="/survey/self/delete/{{ $survey->id }}">
+            <a class="css-button1 alert_notifsurvey" href="/survey/self/delete/{{ $survey->id }}">
               <span class="css-button-icon1"><svg width="16" height="16" viewBox="2 2 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M7.5 7.5A.5.5 0 018 8v6a.5.5 0 01-1 0V8a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V8a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V8z"/>
               <path fill-rule="evenodd" d="M16.5 5a1 1 0 01-1 1H15v9a2 2 0 01-2 2H7a2 2 0 01-2-2V6h-.5a1 1 0 01-1-1V4a1 1 0 011-1H8a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM6.118 6L6 6.059V15a1 1 0 001 1h6a1 1 0 001-1V6.059L13.882 6H6.118zM4.5 5V4h11v1h-11z" clip-rule="evenodd"/>
               </svg></span>
               <span class="css-button-text1"><span>Delete</span></span>
             </a>
-              
-          </div>         
+
+          </div>
           </div>
          @endforeach
         </div>

@@ -138,7 +138,7 @@
                                             <span class="float-right">
                                                 
                                                 @if(auth()->user() && auth()->user()->is_admin)
-                                                <a href="{{route('topic.delete', $latest_user_post->id)}}" class="link-black text-sm">
+                                                <a href="{{route('topic.delete', $latest_user_post->id)}}" class="link-black text-sm alert_notif">
                                                    <i class="fas fa-trash text-danger"></i>
                                                </a> 
                                                 @endif

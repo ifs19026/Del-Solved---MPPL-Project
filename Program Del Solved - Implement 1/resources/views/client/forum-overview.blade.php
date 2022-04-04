@@ -57,7 +57,7 @@
                     {{-- delete topic by admin --}}
                     @if ((auth()->user()->is_admin))
                     <td>
-                      <a class="btn btn-danger" href="/forum/overview/delete/{{ $topic->id }}">delete</a>
+                      <a class="btn btn-danger alert_notiftopic" href="/forum/overview/delete/{{ $topic->id }}">delete</a>
                     </td>
                     @endif
 
