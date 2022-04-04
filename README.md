@@ -2,24 +2,15 @@
 
 Berikut running step:
 
-1.  Lakukan Instalasi Laravel 8 dan XAMPP
+1. clone file proyek
+2. buat database terserah bebas namanya (kalo udah ada, pakai yang lama aja)
+3. buka hasil clone di text editor (saran vsc atau php storm)
+4. lakukan "composer install" di terminal untuk generate laravel
+5. lakukan "node install" di terminal untuk generate file node
+6. lakukan "php artisan migrate:fresh --seed" untuk generate data default 
+7. udah deh run pake "php artisan serve"
 
-2.  Hidupkan XAMPP
 
-    Start Apache
+PERHATIAN : KALO GAGAL CARA DI ATAS SEGERA LAPOR KE TEAM PROGRAMMER YAKK
 
-    Start MySQL
-
-3.  Buat database baru, yang nama database sesuai dengan .env
-
-4.  Lakukan git clone
-
-5.  Buka CMD pada lokasi folder Del-Solved--MPPL-Project yang sudah didownload
-
-6.  Lakukan perintah
-
-    php artisan migrate:fresh --seed
-
-7.  Lakukan perintah berikut untuk merun aplikasi pada browser anda
-
-    php artisan serve
+cheers 🥂
